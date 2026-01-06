@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductForm from "./components/ProductForm";
 import ProductTable from "./components/ProductTable";
 
@@ -12,6 +12,12 @@ type Product = {
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((res) => res.json())
+      .then(setProducts);
+  });
 
   // addProduct helper function
   function addProduct(product: Omit<Product, "id">) {

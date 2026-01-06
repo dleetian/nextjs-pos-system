@@ -17,12 +17,18 @@ export default function ProductForm({
   const [price, setPrice] = useState("");
 
   // helper function
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!name || !price) return;
+    await fetch("/api/products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        price: Number(price),
+      }),
+    });
 
-    onAdd({ name, price: Number(price) });
     setName("");
     setPrice("");
   }

@@ -21,6 +21,16 @@ export default function Cart({
     0
   );
 
+  // Helper function
+  async function checkout() {
+    await fetch("/api/sales", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items }),
+    });
+
+    alert("Sale Completed");
+  }
   return (
     <div className="bg-white p-4 shadow rounded">
       <h2 className="font-bold mb-2">Cart</h2>
@@ -43,7 +53,10 @@ export default function Cart({
 
       <div className="font-bold">Total: ₱{total}</div>
 
-      <button className="mt-4 w-full bg-black text-white py-2 rounded">
+      <button
+        className="mt-4 w-full bg-black text-white py-2 rounded"
+        onClick={checkout}
+      >
         Checkout
       </button>
     </div>

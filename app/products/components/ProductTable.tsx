@@ -25,7 +25,7 @@ export default function ProductTable({
 
       <tbody>
         {products.map((p) => (
-          <tr key={p.id} className="border-b">
+          <tr key={p._id} className="border-b">
             <td className="p-2">{p.name}</td>
             <td className="p-2">{p.price}</td>
             <td className="p-2 text-right">

@@ -52,13 +52,28 @@ export default function POSPage() {
     );
   }
 
+  async function handleCheckout() {
+    await fetch("api/sales", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: cart }),
+    });
+
+    setCart([]);
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="col-span-2">
         <ProductList products={products} onAddToCart={addToCart} />
       </div>
 
-      <Cart items={cart} onIncrease={increase} onDecrease={decrease} />
+      <Cart
+        items={cart}
+        onIncrease={increase}
+        onDecrease={decrease}
+        onCheckout={handleCheckout}
+      />
     </div>
   );
 }
